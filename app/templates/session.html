@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+
+{% block pageContent %}
+
+    <h1>Session example</h1>
+
+    <form method="post" action="/session">
+        <p><label>Username:</label> <input type="text" name="username" required></p>
+        <p><label>Message:</label> <textarea name="message"></textarea></p>
+        <p><button type="submit">Send</button></p>
+    </form>
+
+    <p><a href="/session-message">Data in session</a></p>
+
+{% endblock %}
+

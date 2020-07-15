@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+
+{% block pageContent %}
+
+<script type=text/javascript>
+    $(function() {
+        $('#multiply').bind('click', function() {
+            $.getJSON($SCRIPT_ROOT + '/ajax-multiplication-numbers', {
+                a: $('input[name="a"]').val(),
+                b: $('input[name="b"]').val()
+            }, function(data) {
+                $("#resultField").text(data.result_from_server);
+            });
+            return false;
+        });
+    });
+</script>
+
+
+<h1>Multiplication numbers</h1>
+<p>
+    <input type="number" name="a"> *
+    <input type="number" name="b"> =
+    <span id="resultField">?</span>
+<p>
+    <button type="button" id="multiply">Multiply on server</button>
+
+
+{% endblock %}
+

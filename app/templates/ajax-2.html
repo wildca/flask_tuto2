@@ -1,0 +1,42 @@
+{% extends "_base.html" %}
+
+{% block pageContent %}
+
+<script>
+    $(function() {
+    $('#sendToServer').click(function() {
+        var name = $('input[name="name"]').val();
+        var mail = $('input[name="mail"]').val();
+        $.ajax({
+            url: '/ajax-user',
+            data: $('#formUser').serialize(),
+            type: 'POST',
+            success: function(response) {
+                var jsonArray = $.parseJSON(response);
+                console.log(jsonArray);
+                var text = 'Name = "' + jsonArray.nameUpper + '", mail = "' + jsonArray.mailUpper + '".';
+                console.log(text);
+                $("#responseField").text(text);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+</script>
+
+<h1>User</h1>
+<form id="formUser">
+    <input type="text" name="name"> <br>
+    <input type="text" name="mail">
+    <button type="button" id="sendToServer">Submit</button>
+</form>
+
+<strong>
+    <div id="responseField"></div>
+</strong>
+
+
+{% endblock %}
+

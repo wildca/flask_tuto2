@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+
+{% block pageContent %}
+
+    <h1>User</h1>
+
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Nick</th>
+            <th>Address</th>
+            <th>DELETE</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nick }}</td>
+                <td>{{ user.address.city }}</td>
+                <td><a href="/user-delete/{{user.id}}">X</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+<br><br>
+<h2>Add user</h2>
+<div>
+    <fieldset>
+    <legend>Add user</legend>
+    <form id="addUser" action="/user-add" method="post">
+        Name: <input type="text" name="name"> <br>
+        E-mail: <input type="text" name="email"> <br>
+        Nick: <input type="text" name="nick"> <br>
+        Address: <select name="address">
+            {% for address in addresses %}
+                <option value="{{ address.id }}">{{ address.city }}, {{ address.street }}</option>
+            {% endfor %}
+        </select> <br>
+        <button type="submit" id="createUser">Add</button>
+    </form>
+    </fieldset>
+</div>
+
+{% endblock %}
+
+{% block pageFooter %}
+<p>End of welcome page.</p>
+{% endblock %}

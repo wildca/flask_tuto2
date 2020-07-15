@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8">
+        {% if title %}
+            <title>{{ title }} - example Flask project</title>
+        {% else %}
+            <title>DEFAULT TITLE -example Flask project</title>
+        {% endif %}
+
+        <script type=text/javascript src="
+            {{url_for('static', filename='jquery-2.1.4.min.js') }}
+            "></script>
+
+        <script type=text/javascript>
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+    </head>
+    <body>
+        <header id="pageHeader">
+            <p>Header text...</p>
+            {% block pageHeader %}{% endblock %}
+
+            {% if session.username %}
+                <p style="color: red">
+                    Session username: <em>"{{session.username}}"</em>
+                    <a href="/session-message">Data in session</a>
+                    <a href="/session-clear">Clear session</a>
+                </p>
+            {% endif %}
+            <hr>
+        </header>
+
+        <nav id="pageMenu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/ajax-1">AJAX 1</a></li>
+                <li><a href="/ajax-2">AJAX 2</a></li>
+                <li><a href="/url-path-params/Martin/24">URL path params</a></li>
+                <li><a href="/session">Session</a></li>
+                <li><a href="/address">DB - Address</a></li>
+                <li><a href="/user">DB - User</a></li>
+            </ul>
+            <hr>
+        </nav>
+
+        <div id="pageContent">{% block pageContent %}{% endblock %}</div>
+
+        <footer id="pageFooter">
+            <hr>
+            <p>Footer text...</p>
+            {% block pageFooter %}{% endblock %}
+        </footer>
+    </body>
+</html>
